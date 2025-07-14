@@ -1,2 +1,5 @@
 *.txt
 .ipynb_checkpoints/
+images/
+example.csv
+Working_Business_Proposal.pdf
