@@ -1,5 +1,5 @@
-*.txt
 .ipynb_checkpoints/
-images/
-example.csv
-Working_Business_Proposal.pdf
+Python/images/
+Python/example.csv
+Python/Working_Business_Proposal.pdf
+Python/Assessments/Module-14_Assesment/unzip/*
