@@ -1,0 +1,9 @@
+Explicit is better than implicit.
+Geeksforgeeks Is A Computer Science Portal For Geeks.
+Readability counts.
+It Contains Well Written, Well Thought And Well Explained
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Computer Science And Programming Articles, Quizzes Etc.
+Errors should never pass silently.
+Unless explicitly silenced.
