@@ -1,0 +1,7 @@
+Hello,你好,привет,مرحبا, שלום !
+
+This file contains Unicode characters from different languages.
+
+日本語のテキストも含まれています。
+
+Enjoy exploring the world of Unicode!
