@@ -70,3 +70,37 @@ CREATE TABLE t_products (
 );
 
 
+INSERT INTO t_suppliers(supplier_id, supplier_name) VALUES
+    (1, 'SUPPLIER 1'),
+    (2, 'SUPPLIER 2');
+
+SELECT * FROM t_suppliers;
+
+INSERT INTO t_products (product_id, product_name, supplier_id) VALUES
+    (1, 'PEN', 1),
+    (2, 'PAPER', 2);
+
+SELECT * FROM t_products;
+
+
+INSERT INTO t_suppliers(supplier_id, supplier_name) VALUES
+    (100, 'SUPPLIER 100');
+
+INSERT INTO t_products (product_id, product_name, supplier_id) VALUES
+    (4, 'COMPUTER', 100);
+
+-- Lets try to delete data from the child or foreign table
+DELETE FROM t_products WHERE product_id = 4;
+
+DELETE FROM t_suppliers WHERE supplier_id = 100;
+
+-- DROP a CONSTRAINT
+
+ALTER TABLE t_products
+DROP CONSTRAINT t_products_supplier_id_fkey;
+
+
+-- Add a foriegn key in existing table
+
+ALTER TABLE t_products
+ADD CONSTRAINT t_products_supplier_id_fkey FOREIGN KEY (supplier_id) REFERENCES t_suppliers (supplier_id);
