@@ -91,7 +91,7 @@ SELECT * FROM employee;   --- from public schema
 
 --- Changing Schema ownership
 
-ALTER SCHEMA programming OWNER TO "Basit"
+ALTER SCHEMA programming OWNER TO "admin"
 
 --- creating database test data
 
@@ -114,3 +114,43 @@ pg_dump -d test_schema -h loclahost -U postgres -n public > dump.sql
 psql -h localhost -U postgres -d test_schema -f dump.sql
 
 --- postgre's systen catalog schema containing all built in methods , which having names starting with "pg" so avoid usisng that name 
+
+SELECT * FROM information_schema.schemata;
+
+SELECT COALESCE (c1.table_name, c2.table_name) as table_name,
+	COALESCE(c1.column_name, c2.column_name) as table_column,
+	c1.column_name as schema1,
+	c2.column_name as schema2
+FROM
+(
+	SELECT table_name, column_name 
+	FROM information_schema.columns c 
+	WHERE c.table_schema = 'public'
+) c1	
+FULL JOIN	
+(
+	SELECT table_name, column_name
+	FROM information_schema.columns c 
+	WHERE c.table_schema = 'programming'
+)c2
+ON c1.table_name = c2.table_name AND c1.column_name = c2.column_name
+WHERE c1.column_name is null OR c2.column_name is null
+ORDER by table_name, table_column;
+
+--- Schema Acessess level rights 
+---   - USAGE   only can see data
+---   - CREATE  even modify data
+
+GRANT USAGE ON SCHEMA programming TO "admin";
+
+--- grant select 
+
+GRANT SELECT ON ALL TABLES IN SCHEMA programming TO "admin";
+
+INSERT INTO programming.employee (emp_id,name) VALUES ('7fa7c25e-dfad-4b94-b257-7c8bb81c9f9e','ABC')
+
+SELECT * FROM employee
+
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO "admin";
+
+GRANT CREATE ON SCHEMA programming TO "admin";
