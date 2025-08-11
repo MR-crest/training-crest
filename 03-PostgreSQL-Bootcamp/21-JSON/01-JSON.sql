@@ -287,3 +287,102 @@ Notes:
 - Always choose JSONB unless you specifically need to preserve formatting/whitespace.
 ================================================================================
 */
+
+-- ============================================================================
+-- 9. JSONB Operators & Indexing
+-- ============================================================================
+
+-- Existence Operator '?' — only works if both sides are text values
+SELECT * 
+FROM directors_docs 
+WHERE body->'first_name' ? 'John';
+
+-- Containment Operator @>
+SELECT * 
+FROM directors_docs 
+WHERE body @> '{"first_name":"John"}';
+
+SELECT * 
+FROM directors_docs 
+WHERE body @> '{"director_id":1}';  -- Works on integer data too
+
+SELECT * 
+FROM directors_docs 
+WHERE body->'all_movies' @> '[{"movie_name":"Toy Story"}]';
+
+-- Using LIKE
+SELECT * 
+FROM directors_docs 
+WHERE body->>'first_name' LIKE 'J%';
+
+SELECT * 
+FROM directors_docs 
+WHERE (body->>'director_id')::integer > 2;
+
+SELECT * 
+FROM directors_docs 
+WHERE (body->>'director_id')::integer IN (2,3,4,1,7,8,11);
+
+EXPLAIN 
+SELECT * 
+FROM directors_docs 
+WHERE body->>'first_name' LIKE 'J%';
+
+
+-- ============================================================================
+-- 10. Performance: Inserting & Indexing Large JSONB Data
+-- ============================================================================
+
+-- Example: Searching in 20,000-row table
+SELECT * 
+FROM contacts_docs 
+WHERE body @> '{"first_name":"John"}';
+
+-- Measure execution time before indexing
+EXPLAIN ANALYZE 
+SELECT * 
+FROM contacts_docs 
+WHERE body @> '{"first_name":"John"}';
+-- Execution time before indexing: ~7.3 ms
+
+
+-- ============================================================================
+-- 11. Improving Query Performance with Indexing
+-- ============================================================================
+
+-- Create GIN index on entire JSONB column
+CREATE INDEX idx_gin_contacts_docs_body 
+ON contacts_docs USING GIN (body);
+
+-- Execution time after indexing: ~1.36 ms
+EXPLAIN ANALYZE 
+SELECT * 
+FROM contacts_docs 
+WHERE body @> '{"first_name":"John"}';
+
+-- Check index size
+SELECT pg_size_pretty(pg_relation_size('idx_gin_contacts_docs_body'::regclass)) AS index_size;
+
+
+-- ============================================================================
+-- 12. More Efficient Indexing: jsonb_path_ops
+-- ============================================================================
+
+-- This uses less space for containment queries
+CREATE INDEX idx_gin_contacts_docs_body_cooll 
+ON contacts_docs USING GIN (body jsonb_path_ops);
+
+-- Reduced index size
+SELECT pg_size_pretty(pg_relation_size('idx_gin_contacts_docs_body_cooll'::regclass)) AS index_size;
+
+
+-- ============================================================================
+-- 13. Indexing Specific JSON Keys
+-- ============================================================================
+
+-- Create index on a specific JSON key
+CREATE INDEX idx_gin_contacts_docs_body_fname 
+ON contacts_docs USING GIN ((body->'first_name') jsonb_path_ops);
+
+-- Check index size
+SELECT pg_size_pretty(pg_relation_size('idx_gin_contacts_docs_body_fname'::regclass)) AS index_size;
