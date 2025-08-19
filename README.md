@@ -3,4 +3,5 @@
 |---------------------------|---------------|---------------|
 | Python Programming         | July 4, 2025  | July 16, 2025  |
 | Python Practice         | July 16, 2025  ||
-| PostgreSQL Bootcamp         | July 28, 2025  ||
+| PostgreSQL Bootcamp         | July 28, 2025  | Aug 14, 2025  |
+| Designing RESTful APIs         | Aug 18, 2025  | Aug 19, 2025  |
