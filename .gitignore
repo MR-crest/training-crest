@@ -3,3 +3,4 @@ Python/images/
 Python/example.csv
 Python/Working_Business_Proposal.pdf
 Python/Assessments/Module-14_Assesment/unzip/*
+__pycache__/
