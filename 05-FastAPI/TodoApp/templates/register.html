@@ -1,0 +1,166 @@
+{% extends 'layout.html' %}
+
+{% block title %}Register - TodoApp{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-7">
+            <div class="card fade-in-up">
+                <div class="card-header text-center">
+                    <i class="fas fa-user-plus fa-2x mb-2"></i>
+                    <h4 class="mb-0">Create Account</h4>
+                    <p class="text-light mb-0">Join TodoApp and start organizing your tasks</p>
+                </div>
+                <div class="card-body">
+                    <form id="registerForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">
+                                        <i class="fas fa-envelope me-2"></i>
+                                        Email Address
+                                    </label>
+                                    <input type="email"
+                                           class="form-control"
+                                           id="email"
+                                           name="email"
+                                           placeholder="your.email@example.com"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="username">
+                                        <i class="fas fa-user me-2"></i>
+                                        Username
+                                    </label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="username"
+                                           name="username"
+                                           placeholder="Choose a unique username"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="firstname">
+                                        <i class="fas fa-id-card me-2"></i>
+                                        First Name
+                                    </label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="firstname"
+                                           name="firstname"
+                                           placeholder="Your first name"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="lastname">
+                                        <i class="fas fa-id-card me-2"></i>
+                                        Last Name
+                                    </label>
+                                    <input type="text"
+                                           class="form-control"
+                                           id="lastname"
+                                           name="lastname"
+                                           placeholder="Your last name"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="role">
+                                        <i class="fas fa-user-tag me-2"></i>
+                                        Role
+                                    </label>
+                                    <select class="form-control" id="role" name="role" required>
+                                        <option value="">Select your role</option>
+                                        <option value="user">User</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="phone_number">
+                                        <i class="fas fa-phone me-2"></i>
+                                        Phone Number
+                                    </label>
+                                    <input type="tel"
+                                           class="form-control"
+                                           id="phone_number"
+                                           name="phone_number"
+                                           placeholder="(555) 123-4567"
+                                           autocomplete="tel"
+                                           required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">
+                                <i class="fas fa-lock me-2"></i>
+                                Password
+                            </label>
+                            <input type="password"
+                                   class="form-control"
+                                   id="password"
+                                   name="password"
+                                   placeholder="Create a strong password"
+                                   autocomplete="new-password"
+                                   required>
+                            <small class="form-text text-muted">Minimum 6 characters</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password2">
+                                <i class="fas fa-lock me-2"></i>
+                                Confirm Password
+                            </label>
+                            <input type="password"
+                                   class="form-control"
+                                   id="password2"
+                                   name="password2"
+                                   placeholder="Confirm your password"
+                                   autocomplete="new-password"
+                                   required>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-6">
+                                <a href="/auth/login-page" class="btn btn-outline-secondary w-100">
+                                    <i class="fas fa-arrow-left me-2"></i>
+                                    Back to Login
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-user-plus me-2"></i>
+                                    Create Account
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+

@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+
+{% block title %}Add New Task - TodoApp{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card fade-in-up">
+                <div class="card-header text-center">
+                    <i class="fas fa-plus-circle fa-2x mb-2"></i>
+                    <h4 class="mb-0">Create New Task</h4>
+                    <p class="text-light mb-0">Add a new item to your todo list</p>
+                </div>
+                <div class="card-body">
+                    <form id="todoForm">
+                        <div class="form-group">
+                            <label for="title">
+                                <i class="fas fa-heading me-2"></i>
+                                Task Title
+                            </label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="title"
+                                   name="title"
+                                   placeholder="Enter a descriptive title for your task"
+                                   required>
+                            <small class="form-text text-muted">Keep it short and clear</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">
+                                <i class="fas fa-align-left me-2"></i>
+                                Description
+                            </label>
+                            <textarea class="form-control"
+                                      id="description"
+                                      rows="4"
+                                      name="description"
+                                      placeholder="Provide more details about this task..."
+                                      required></textarea>
+                            <small class="form-text text-muted">Describe what needs to be done</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="priority">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                Priority Level
+                            </label>
+                            <select class="form-control" id="priority" name="priority">
+                                <option value="1">
+                                    <i class="fas fa-arrow-down"></i>
+                                    1 - Low Priority
+                                </option>
+                                <option value="2">2 - Low-Medium Priority</option>
+                                <option value="3" selected>3 - Medium Priority</option>
+                                <option value="4">4 - High Priority</option>
+                                <option value="5">
+                                    <i class="fas fa-exclamation"></i>
+                                    5 - Urgent
+                                </option>
+                            </select>
+                            <small class="form-text text-muted">Choose how important this task is</small>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-6">
+                                <a href="/todos/todo-page" class="btn btn-outline-secondary w-100">
+                                    <i class="fas fa-arrow-left me-2"></i>
+                                    Cancel
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-plus me-2"></i>
+                                    Create Task
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

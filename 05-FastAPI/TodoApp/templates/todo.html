@@ -1,0 +1,186 @@
+{% extends 'layout.html' %}
+
+{% block title %}Dashboard - TodoApp{% endblock %}
+
+{% block content %}
+<div class="container fade-in-up">
+    <!-- Welcome Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h2 class="mb-3">
+                        <i class="fas fa-tasks text-primary me-2"></i>
+                        Welcome back, {{ user.username }}!
+                    </h2>
+                    <p class="text-muted">Manage your tasks efficiently and stay productive</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-list-ul fa-2x text-primary mb-2"></i>
+                    <h4>{{ todos|length }}</h4>
+                    <p class="text-muted">Total Tasks</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-check-circle fa-2x text-success mb-2"></i>
+                    <h4>{{ todos|selectattr("complete", "equalto", true)|list|length }}</h4>
+                    <p class="text-muted">Completed</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="fas fa-clock fa-2x text-warning mb-2"></i>
+                    <h4>{{ todos|selectattr("complete", "equalto", false)|list|length }}</h4>
+                    <p class="text-muted">Pending</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Todo List -->
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">
+                <i class="fas fa-clipboard-list me-2"></i>
+                Your Tasks
+            </h5>
+            <a href="add-todo-page" class="btn btn-primary">
+                <i class="fas fa-plus me-1"></i>
+                Add New Task
+            </a>
+        </div>
+        <div class="card-body">
+            {% if todos %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <i class="fas fa-hashtag me-1"></i>
+                                #
+                            </th>
+                            <th scope="col">
+                                <i class="fas fa-heading me-1"></i>
+                                Title
+                            </th>
+                            <th scope="col">
+                                <i class="fas fa-align-left me-1"></i>
+                                Description
+                            </th>
+                            <th scope="col">
+                                <i class="fas fa-exclamation-triangle me-1"></i>
+                                Priority
+                            </th>
+                            <th scope="col">
+                                <i class="fas fa-check-square me-1"></i>
+                                Status
+                            </th>
+                            <th scope="col">
+                                <i class="fas fa-cogs me-1"></i>
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for todo in todos %}
+                    <tr class="{% if todo.complete %}table-success{% endif %}
+                              {% if todo.priority >= 4 %}priority-high{% elif todo.priority >= 3 %}priority-medium{% else %}priority-low{% endif %}">
+                        <td class="fw-bold">{{ loop.index }}</td>
+                        <td class="{% if todo.complete %}strike-through-td{% endif %}">
+                            <strong>{{ todo.title }}</strong>
+                        </td>
+                        <td class="{% if todo.complete %}strike-through-td{% endif %}">
+                            {{ todo.description[:50] }}{% if todo.description|length > 50 %}...{% endif %}
+                        </td>
+                        <td>
+                            {% if todo.priority >= 4 %}
+                                <span class="badge bg-danger">
+                                    <i class="fas fa-exclamation-triangle me-1"></i>
+                                    High
+                                </span>
+                            {% elif todo.priority >= 3 %}
+                                <span class="badge bg-warning">
+                                    <i class="fas fa-exclamation me-1"></i>
+                                    Medium
+                                </span>
+                            {% else %}
+                                <span class="badge bg-success">
+                                    <i class="fas fa-check me-1"></i>
+                                    Low
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if todo.complete %}
+                                <span class="badge bg-success">
+                                    <i class="fas fa-check-circle me-1"></i>
+                                    Completed
+                                </span>
+                            {% else %}
+                                <span class="badge bg-warning">
+                                    <i class="fas fa-clock me-1"></i>
+                                    Pending
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <button onclick="window.location.href='edit-todo-page/{{todo.id}}'"
+                                        type="button" class="btn btn-sm btn-info" title="Edit Task">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                {% if not todo.complete %}
+                                <button onclick="markComplete({{todo.id}})"
+                                        type="button" class="btn btn-sm btn-success" title="Mark Complete">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-clipboard-list fa-4x text-muted mb-3"></i>
+                <h4 class="text-muted">No tasks yet!</h4>
+                <p class="text-muted">Start by creating your first task</p>
+                <a href="add-todo-page" class="btn btn-primary btn-lg">
+                    <i class="fas fa-plus me-2"></i>
+                    Create Your First Task
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+function markComplete(todoId) {
+    // This would need to be implemented with an API call
+    // For now, just redirect to edit page
+    window.location.href = `edit-todo-page/${todoId}`;
+}
+</script>
+{% endblock %}
+
+
+
+
+
+
