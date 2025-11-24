@@ -1,9 +1,14 @@
 # Training@CREST
-| Course Name               | Start Date    | End Date      |
-|---------------------------|---------------|---------------|
-| Python Programming         | July 4, 2025  | July 16, 2025  |
-| Python Practice         | July 16, 2025  ||
-| PostgreSQL Bootcamp         | July 28, 2025  | Aug 14, 2025  |
-| Designing RESTful APIs         | Aug 18, 2025  | Aug 19, 2025  |
-| FastAPI          | Aug 20, 2025  | Sep 01, 2025  |
-| Git & GitHub Bootcamp         | Sep 02, 2025  | Sep 09, 2025  |
+
+| Course Name | Start Date | End Date |
+|-------------|------------|----------|
+| **Python Bootcamp** | 04-07-2025 | 16-07-2025 |
+| **Article, Style Guide / Python Practice** | 16-07-2025 | 24-09-2025 |
+| **PostgreSQL** | 28-07-2025 | 14-08-2025 |
+| **REST API** | 18-08-2025 | 19-08-2025 |
+| **FastAPI** | 20-08-2025 | 01-09-2025 |
+| **The Git & GitHub Bootcamp** | 02-09-2025 | 09-09-2025 |
+| **Python for Data Science and Machine Learning Bootcamp** | 10-09-2025 | 23-09-2025 |
+| **The AI Engineer Course 2025: Complete AI Engineer Bootcamp** | 24-09-2025 | 23-10-2025 |
+| **The Complete Agentic AI Engineering Course (2025)** | 24-10-2025 | 20-11-2025 |
+| **LLM Engineering: Master AI, Large Language Models & Agents** | 24-11-2025 | — |
